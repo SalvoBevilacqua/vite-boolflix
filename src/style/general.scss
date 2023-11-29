@@ -1,0 +1,11 @@
+@use "./partials/variables" as *;
+@import '@fontsource/roboto';
+@import "bootstrap/scss/bootstrap.scss";
+
+img {
+    max-width: 100%;
+}
+
+body {
+    font-family: $main-font;
+}
