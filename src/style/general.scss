@@ -9,3 +9,13 @@ img {
 body {
     font-family: $main-font;
 }
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: lightgray;
+    border-radius: 5px;
+}

@@ -17,12 +17,12 @@ export default {
 </script>
 
 <template>
-    <div class="bg-dark bg-gradient p-4">
-        <div class="container p-4 bg-white my-3 rounded-2">
+    <div class="bg-dark p-5">
+        <div class="p-4 bg-white rounded-2">
             <AppLoader v-if="store.flagLoading" />
 
             <div v-else>
-                <h2 class="border border-danger border-2 rounded p-2 d-inline-block">Movies:</h2>
+                <h2 class="border border-danger border-2 rounded p-2 mb-3 d-inline-block">Movies:</h2>
                 <div class="row row-cols-5 row-gap-4">
                     <div class="col" v-for="movie in store.arrayMovie" :key="movie.id">
                         <AppCard :movieObj="movie" />
