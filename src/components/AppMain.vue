@@ -17,21 +17,23 @@ export default {
 </script>
 
 <template>
-    <div class="container p-4 bg-white my-4 rounded-2">
-        <AppLoader v-if="store.flagLoading" />
+    <div class="bg-dark bg-gradient p-4">
+        <div class="container p-4 bg-white my-3 rounded-2">
+            <AppLoader v-if="store.flagLoading" />
 
-        <div v-else>
-            <h2>Movies:</h2>
-            <div class="row row-cols-5 row-gap-4">
-                <div class="col" v-for="movie in store.arrayMovie" :key="movie.id">
-                    <AppCard :movieObj="movie" />
+            <div v-else>
+                <h2 class="border border-danger border-2 rounded p-2 d-inline-block">Movies:</h2>
+                <div class="row row-cols-5 row-gap-4">
+                    <div class="col" v-for="movie in store.arrayMovie" :key="movie.id">
+                        <AppCard :movieObj="movie" />
+                    </div>
                 </div>
-            </div>
 
-            <h2 class="my-3">Series:</h2>
-            <div class="row row-cols-5 row-gap-4">
-                <div class="col" v-for="serie in store.arrayTv" :key="serie.id">
-                    <AppCard :movieObj="serie" />
+                <h2 class="border border-danger border-2 rounded p-2 d-inline-block my-3">Series:</h2>
+                <div class="row row-cols-5 row-gap-4">
+                    <div class="col" v-for="serie in store.arrayTv" :key="serie.id">
+                        <AppCard :movieObj="serie" />
+                    </div>
                 </div>
             </div>
         </div>
