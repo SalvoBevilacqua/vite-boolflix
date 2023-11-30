@@ -18,13 +18,32 @@ export default {
     this.searchMovie();
   },
   methods: {
-    searchMovie() {
+    searchMovie(command, what) {
+      if (command == undefined) {
+        command = "search";
+      }
+      if (what == undefined) {
+        what = "movie";
+      }
+
+      this.store.flagLoading = true;
+
+      let stringa = "";
+
+      if (this.store.stringToSearch != "") {
+        stringa = this.store.stringToSearch;
+      }
+      else {
+        stringa = "A";
+        //così prendo i primi risultati della call
+      }
+
       const params = {
-        query: this.store.queryTD,
+        query: stringa,
         api_key: this.store.apiKey
       }
-      this.store.flagLoading = true;
-      axios.get(this.store.apiMovie, { params }).then((resp) => {
+
+      axios.get(`${this.store.apiUrl}/${command}/${what}`, { params }).then((resp) => {
         this.store.arrayMovie = resp.data.results;
         this.store.activeMoviePage = resp.data.page;
         this.store.totalMoviePages = resp.data.total_pages;
@@ -32,15 +51,19 @@ export default {
         this.store.flagLoading = false;
       });
     },
-  },
-}
+  }
+};
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader @search="searchMovie" />
+
   <AppMain />
 </template>
 
 <style lang="scss">
 @use "./style/general.scss";
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+// @import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
 </style>

@@ -1,10 +1,25 @@
 <script>
-export default {
+import { store } from "../store.js";
 
+export default {
+    data() {
+        return {
+            store
+        }
+    },
 };
 </script>
 
-<template></template>
+<template>
+    <header class="d-flex p-3 w-100 align-items-center bg-black text-light justify-content-between">
+        <h1 class="text-danger">Boolflix</h1>
+        <div class="d-flex gap-3 w-25">
+            <input class="bg-transparent form-control text-white" type="text" aria-label="default input example"
+                id="input_search" v-model="store.stringToSearch" @keyup.enter="$emit('search')">
+            <button type="button" class="btn btn-outline-light" @click="$emit('search')">Search</button>
+        </div>
+    </header>
+</template>
 
 <style lang="scss" scoped>
 @use "../style/partials/variables" as *;
