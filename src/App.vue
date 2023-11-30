@@ -49,10 +49,6 @@ export default {
           this.store.flagLoading = false;
         });
       });
-
-
-
-
     },
   }
 };
@@ -60,7 +56,6 @@ export default {
 
 <template>
   <AppHeader @search="search" />
-
   <AppMain />
 </template>
 

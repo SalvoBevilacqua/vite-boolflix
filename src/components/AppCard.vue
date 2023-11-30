@@ -33,12 +33,12 @@ export default {
 
 <template>
     <div class="card bg-dark text-center h-100 text-white position-relative overflow-y-auto ms_card">
-        <img v-if="movieObj.poster_path" :src="`http://image.tmdb.org/t/p/w342${movieObj.poster_path}`" class="w-100 h-100"
-            :alt="movieObj.id">
+        <img v-if="movieObj.poster_path" :src="`http://image.tmdb.org/t/p/w342${movieObj.poster_path}`"
+            class="h-100 object-fit-cover" :alt="movieObj.id">
         <p v-else class="d-flex align-items-center justify-content-center" style="height: 100%;">Copertina non
             disponibile
         </p>
-        <div class="info position-absolute top-0 start-0 px-2 py-4 w-100 align-items-center  flex-column">
+        <div class="info position-absolute top-0 start-0 px-2 py-4 w-100 align-items-center flex-column">
             <h5 class="card-title">{{ existTitle }}</h5>
             <p v-if="existTitle != existOriginalTitle" class="card-text">{{ existOriginalTitle }}</p>
             <img class="w-25 m-3" v-if="existFlag" :src="getFlagUrl(movieObj.original_language)" :alt="movieObj.title" />
@@ -63,13 +63,8 @@ export default {
         .info {
             display: flex;
             background-color: rgba(0, 0, 0, 0.700);
-            padding-top: 1rem;
             height: 100%;
         }
-    }
-
-    img {
-        object-fit: cover;
     }
 }
 </style>
