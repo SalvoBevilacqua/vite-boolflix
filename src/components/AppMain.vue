@@ -21,9 +21,17 @@ export default {
         <AppLoader v-if="store.flagLoading" />
 
         <div v-else>
+            <h2>Movies:</h2>
             <div class="row row-cols-5 row-gap-4">
-                <div class="col" v-for="item in store.arrayMovie" :key="store.arrayMovie.id">
-                    <AppCard :movie="item" />
+                <div class="col" v-for="movie in store.arrayMovie" :key="movie.id">
+                    <AppCard :movieObj="movie" />
+                </div>
+            </div>
+
+            <h2 class="my-3">Series:</h2>
+            <div class="row row-cols-5 row-gap-4">
+                <div class="col" v-for="serie in store.arrayTv" :key="serie.id">
+                    <AppCard :movieObj="serie" />
                 </div>
             </div>
         </div>

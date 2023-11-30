@@ -15,19 +15,11 @@ export default {
     }
   },
   created() {
-    this.searchMovie();
+    this.search();
   },
   methods: {
-    searchMovie(command, what) {
-      if (command == undefined) {
-        command = "search";
-      }
-      if (what == undefined) {
-        what = "movie";
-      }
-
+    search() {
       this.store.flagLoading = true;
-
       let stringa = "";
 
       if (this.store.stringToSearch != "") {
@@ -35,7 +27,6 @@ export default {
       }
       else {
         stringa = "A";
-        //così prendo i primi risultati della call
       }
 
       const params = {
@@ -43,20 +34,32 @@ export default {
         api_key: this.store.apiKey
       }
 
-      axios.get(`${this.store.apiUrl}/${command}/${what}`, { params }).then((resp) => {
+      axios.get(`${this.store.apiUrl}/search/movie`, { params }).then((resp) => {
         this.store.arrayMovie = resp.data.results;
         this.store.activeMoviePage = resp.data.page;
         this.store.totalMoviePages = resp.data.total_pages;
         this.store.totalMovieResults = resp.data.total_results;
-        this.store.flagLoading = false;
+
+        axios.get(`${this.store.apiUrl}/search/tv`, { params }).then((response) => {
+          this.store.arrayTv = response.data.results;
+          this.store.activeTvPage = response.data.page;
+          this.store.totalTvPages = response.data.total_pages;
+          this.store.totalTvResults = response.data.total_results;
+
+          this.store.flagLoading = false;
+        });
       });
+
+
+
+
     },
   }
 };
 </script>
 
 <template>
-  <AppHeader @search="searchMovie" />
+  <AppHeader @search="search" />
 
   <AppMain />
 </template>
