@@ -20,36 +20,30 @@ export default {
   methods: {
     search() {
       this.store.flagLoading = true;
-      let stringa = "";
+      let urls = [];
 
       if (this.store.stringToSearch != "") {
-        stringa = this.store.stringToSearch;
+        urls = [
+          `${this.store.apiUrl}/search/movie?query=${this.store.stringToSearch}&api_key=${this.store.apiKey}`,
+          `${this.store.apiUrl}/search/tv?query=${this.store.stringToSearch}&api_key=${this.store.apiKey}`
+        ];
       }
       else {
-        stringa = "A";
+        urls = [
+          `${this.store.apiUrl}/discover/movie?page=1&sort_by=popularity.desc&api_key=${this.store.apiKey}`,
+          `${this.store.apiUrl}/discover/tv?page=1&sort_by=popularity.desc&api_key=${this.store.apiKey}`
+        ];
       }
 
-      const params = {
-        query: stringa,
-        api_key: this.store.apiKey
-      }
+      const requests = urls.map((url) => axios.get(url));
+      axios.all(requests).then((resp) => {
+        console.log(resp[0].data.results);
+        this.store.arrayMovie = resp[0].data.results;
+        this.store.arrayTv = resp[1].data.results;
 
-      axios.get(`${this.store.apiUrl}/search/movie`, { params }).then((resp) => {
-        this.store.arrayMovie = resp.data.results;
-        this.store.activeMoviePage = resp.data.page;
-        this.store.totalMoviePages = resp.data.total_pages;
-        this.store.totalMovieResults = resp.data.total_results;
-
-        axios.get(`${this.store.apiUrl}/search/tv`, { params }).then((response) => {
-          this.store.arrayTv = response.data.results;
-          this.store.activeTvPage = response.data.page;
-          this.store.totalTvPages = response.data.total_pages;
-          this.store.totalTvResults = response.data.total_results;
-
-          this.store.flagLoading = false;
-        });
-      });
-    },
+        this.store.flagLoading = false;
+      })
+    }
   }
 };
 </script>

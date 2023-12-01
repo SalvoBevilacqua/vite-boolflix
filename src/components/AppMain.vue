@@ -17,7 +17,7 @@ export default {
 </script>
 
 <template>
-    <div class="bg-dark p-5">
+    <div class="bg-dark px-4 pb-4">
         <div class="p-4 bg-white rounded-2">
             <AppLoader v-if="store.flagLoading" />
 
