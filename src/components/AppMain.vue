@@ -22,14 +22,14 @@ export default {
             <AppLoader v-if="store.flagLoading" />
 
             <div v-else>
-                <h2 class="border border-danger border-2 rounded p-2 mb-3 d-inline-block">Movies:</h2>
+                <a type="button" id="movie" href="#tv" class="btn btn-outline-dark mb-3">Movies</a>
                 <div class="row row-cols-5 row-gap-4">
                     <div class="col" v-for="movie in store.arrayMovie" :key="movie.id">
                         <AppCard :movieObj="movie" />
                     </div>
                 </div>
 
-                <h2 class="border border-danger border-2 rounded p-2 d-inline-block my-3">Series:</h2>
+                <a id="tv" href="#movie" type="button" class="btn btn-outline-dark my-3">Series</a>
                 <div class="row row-cols-5 row-gap-4">
                     <div class="col" v-for="serie in store.arrayTv" :key="serie.id">
                         <AppCard :movieObj="serie" />

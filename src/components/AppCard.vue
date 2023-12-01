@@ -14,7 +14,7 @@ export default {
         },
         round(num) {
             const vote = num / 2;
-            return Math.round(vote);
+            return Math.ceil(vote);
         }
     },
     computed: {
