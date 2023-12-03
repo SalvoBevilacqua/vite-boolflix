@@ -37,7 +37,6 @@ export default {
 
       const requests = urls.map((url) => axios.get(url));
       axios.all(requests).then((resp) => {
-        console.log(resp[0].data.results);
         this.store.arrayMovie = resp[0].data.results;
         this.store.arrayTv = resp[1].data.results;
 
@@ -45,7 +44,7 @@ export default {
       })
     }
   }
-};
+}
 </script>
 
 <template>
