@@ -30,7 +30,14 @@ export default {
           `${this.store.apiUrl}/genre/tv/list?api_key=${this.store.apiKey}`
         ];
       }
-      else {
+      else if (this.store.chosenGenre != "") {
+        urls = [
+          `${this.store.apiUrl}/discover/movie?with_genres=${this.store.chosenGenre}&api_key=${this.store.apiKey}`,
+          `${this.store.apiUrl}/discover/tv?with_genres=${this.store.chosenGenre}&api_key=${this.store.apiKey}`,
+          `${this.store.apiUrl}/genre/movie/list?api_key=${this.store.apiKey}`,
+          `${this.store.apiUrl}/genre/tv/list?api_key=${this.store.apiKey}`
+        ];
+      } else {
         urls = [
           `${this.store.apiUrl}/discover/movie?page=1&sort_by=popularity.desc&api_key=${this.store.apiKey}`,
           `${this.store.apiUrl}/discover/tv?page=1&sort_by=popularity.desc&api_key=${this.store.apiKey}`,
@@ -46,6 +53,7 @@ export default {
         this.store.arrayGenres = resp[2].data.genres;
 
         this.store.flagLoading = false;
+        this.store.chosenGenre = "";
       });
     },
     reset() {
@@ -58,7 +66,7 @@ export default {
 
 <template>
   <AppHeader @search="search" />
-  <AppMain @reset="reset" />
+  <AppMain @reset="reset" @search="search" />
 </template>
 
 <style lang="scss">
