@@ -16,20 +16,20 @@ export default {
     },
     methods: {
         searchCast(id, string) {
-            this.store.genresList = [];
-            this.store.movieId = "";
             this.store.movieId = id;
+            this.store.genresList = [];
             this.store.castList = [];
-            axios.get(`${this.store.apiUrl}/${string}/${id}/credits?api_key=${this.store.apiKey}`).then((resp) => {
-                for (let i = 0; i < 5; i++) {
-                    this.store.castList.push(resp.data.cast[i].name)
+            const reqCast = `${this.store.apiUrl}/${string}/${id}/credits?api_key=${this.store.apiKey}`;
+            axios.get(reqCast).then((resp) => {
+                if (resp.data.cast.length > 1) {
+                    for (let i = 0; i < 5; i++)
+                        this.store.castList.push(resp.data.cast[i].name);
                 }
             });
         },
         searchGenres(id, genre_ids) {
-            this.store.movieId = "";
-            this.store.castList = [];
             this.store.movieId = id;
+            this.store.castList = [];
             this.store.genresList = [];
             this.store.arrayGenres.forEach(element => {
                 genre_ids.forEach(ele => {
@@ -38,7 +38,7 @@ export default {
                     }
                 });
             });
-        }
+        },
     }
 };
 </script>
@@ -49,7 +49,19 @@ export default {
             <AppLoader v-if="store.flagLoading" />
 
             <div v-else>
-                <a type="button" id="movie" href="#tv" class="btn btn-outline-dark mb-3">Movies</a>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <a type="button" id="movie" href="#tv" class="btn btn-outline-dark">Movies</a>
+
+                    <div class="d-flex gap-4">
+                        <button @click="$emit('reset')" type="button" class="btn btn-outline-dark">Reset</button>
+                        <select class="form-select" aria-label="archetype" id="select" v-model="store.chosenGenre"
+                            @change="$emit('search')">
+                            <option disabled value="">Chose the Genres</option>
+                            <option v-for="item in store.arrayGenres" :value="item.id">{{ item.name }}</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="row row-cols-5 row-gap-4">
                     <div class="col" v-for="movie in store.arrayMovie" :key="movie.id">
                         <AppCard :movieObj="movie" @cast="searchCast(movie.id, 'movie')"
@@ -57,7 +69,7 @@ export default {
                     </div>
                 </div>
 
-                <a id="tv" href="#movie" type="button" class="btn btn-outline-dark my-3">Series</a>
+                <a id="tv" href="#movie" type="button" class="btn btn-outline-dark my-4">Series</a>
                 <div class="row row-cols-5 row-gap-4">
                     <div class="col" v-for="serie in store.arrayTv" :key="serie.id">
                         <AppCard :movieObj="serie" @cast="searchCast(serie.id, 'tv')"

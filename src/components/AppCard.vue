@@ -30,6 +30,12 @@ export default {
         existOriginalTitle() {
             return this.movieObj.original_title ? this.movieObj.original_title : this.movieObj.original_name;
         },
+        existGenres() {
+            return this.store.genresList.length === 0 ? false : true;
+        },
+        existCast() {
+            return this.store.castList.length === 0 ? false : true;
+        }
     }
 };
 </script>
@@ -50,7 +56,7 @@ export default {
 
             <a class="icon-link text-white mb-3 link-underline-light" href="#" @click.prevent="$emit('cast')">Cast</a>
 
-            <ul class="list-group w-75 mb-2">
+            <ul v-if="existCast" class="list-group w-75 mb-2">
                 <li v-if="store.movieId === movieObj.id" v-for="item in store.castList" class="list-group-item text.white">
                     {{ item }}
                 </li>
@@ -58,7 +64,7 @@ export default {
 
             <a class="icon-link text-white mb-3 link-underline-light" href="#" @click.prevent="$emit('genres')">Generi</a>
 
-            <ul class="list-group w-75 mb-2">
+            <ul v-if="existGenres" class="list-group w-75 mb-2">
                 <li v-if="store.movieId === movieObj.id" v-for="item in store.genresList"
                     class="list-group-item text.white">
                     {{ item }}

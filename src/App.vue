@@ -25,14 +25,17 @@ export default {
       if (this.store.stringToSearch != "") {
         urls = [
           `${this.store.apiUrl}/search/movie?query=${this.store.stringToSearch}&api_key=${this.store.apiKey}`,
-          `${this.store.apiUrl}/search/tv?query=${this.store.stringToSearch}&api_key=${this.store.apiKey}`
+          `${this.store.apiUrl}/search/tv?query=${this.store.stringToSearch}&api_key=${this.store.apiKey}`,
+          `${this.store.apiUrl}/genre/movie/list?api_key=${this.store.apiKey}`,
+          `${this.store.apiUrl}/genre/tv/list?api_key=${this.store.apiKey}`
         ];
       }
       else {
         urls = [
           `${this.store.apiUrl}/discover/movie?page=1&sort_by=popularity.desc&api_key=${this.store.apiKey}`,
           `${this.store.apiUrl}/discover/tv?page=1&sort_by=popularity.desc&api_key=${this.store.apiKey}`,
-          this.store.apiReqGenre,
+          `${this.store.apiUrl}/genre/movie/list?api_key=${this.store.apiKey}`,
+          `${this.store.apiUrl}/genre/tv/list?api_key=${this.store.apiKey}`
         ];
       }
 
@@ -44,6 +47,10 @@ export default {
 
         this.store.flagLoading = false;
       });
+    },
+    reset() {
+      this.store.stringToSearch = "";
+      this.search();
     }
   }
 }
@@ -51,7 +58,7 @@ export default {
 
 <template>
   <AppHeader @search="search" />
-  <AppMain />
+  <AppMain @reset="reset" />
 </template>
 
 <style lang="scss">
