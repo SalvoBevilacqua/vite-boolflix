@@ -56,7 +56,7 @@ export default {
                         <button @click="$emit('reset')" type="button" class="btn btn-outline-dark">Reset</button>
                         <select class="form-select" aria-label="archetype" id="select" v-model="store.chosenGenre"
                             @change="$emit('search')">
-                            <option disabled value="">Chose the Genres</option>
+                            <option disabled value="">Choose the Genre</option>
                             <option v-for="item in store.arrayGenres" :value="item.id">{{ item.name }}</option>
                         </select>
                     </div>
