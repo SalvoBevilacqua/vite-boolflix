@@ -16,12 +16,27 @@ export default {
     },
     methods: {
         searchCast(id, string) {
+            this.store.genresList = [];
+            this.store.movieId = "";
             this.store.movieId = id;
             this.store.castList = [];
             axios.get(`${this.store.apiUrl}/${string}/${id}/credits?api_key=${this.store.apiKey}`).then((resp) => {
                 for (let i = 0; i < 5; i++) {
                     this.store.castList.push(resp.data.cast[i].name)
                 }
+            });
+        },
+        searchGenres(id, genre_ids) {
+            this.store.movieId = "";
+            this.store.castList = [];
+            this.store.movieId = id;
+            this.store.genresList = [];
+            this.store.arrayGenres.forEach(element => {
+                genre_ids.forEach(ele => {
+                    if (element.id === ele) {
+                        this.store.genresList.push(element.name);
+                    }
+                });
             });
         }
     }
@@ -37,14 +52,16 @@ export default {
                 <a type="button" id="movie" href="#tv" class="btn btn-outline-dark mb-3">Movies</a>
                 <div class="row row-cols-5 row-gap-4">
                     <div class="col" v-for="movie in store.arrayMovie" :key="movie.id">
-                        <AppCard :movieObj="movie" @cast="searchCast(movie.id, 'movie')" />
+                        <AppCard :movieObj="movie" @cast="searchCast(movie.id, 'movie')"
+                            @genres="searchGenres(movie.id, movie.genre_ids)" />
                     </div>
                 </div>
 
                 <a id="tv" href="#movie" type="button" class="btn btn-outline-dark my-3">Series</a>
                 <div class="row row-cols-5 row-gap-4">
                     <div class="col" v-for="serie in store.arrayTv" :key="serie.id">
-                        <AppCard :movieObj="serie" @cast="searchCast(serie.id, 'tv')" />
+                        <AppCard :movieObj="serie" @cast="searchCast(serie.id, 'tv')"
+                            @genres="searchGenres(serie.id, serie.genre_ids)" />
                     </div>
                 </div>
             </div>

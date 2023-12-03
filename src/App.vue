@@ -31,7 +31,8 @@ export default {
       else {
         urls = [
           `${this.store.apiUrl}/discover/movie?page=1&sort_by=popularity.desc&api_key=${this.store.apiKey}`,
-          `${this.store.apiUrl}/discover/tv?page=1&sort_by=popularity.desc&api_key=${this.store.apiKey}`
+          `${this.store.apiUrl}/discover/tv?page=1&sort_by=popularity.desc&api_key=${this.store.apiKey}`,
+          this.store.apiReqGenre,
         ];
       }
 
@@ -39,9 +40,10 @@ export default {
       axios.all(requests).then((resp) => {
         this.store.arrayMovie = resp[0].data.results;
         this.store.arrayTv = resp[1].data.results;
+        this.store.arrayGenres = resp[2].data.genres;
 
         this.store.flagLoading = false;
-      })
+      });
     }
   }
 }
