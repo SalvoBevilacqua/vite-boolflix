@@ -21,7 +21,7 @@ export default {
             this.store.castList = [];
             const reqCast = `${this.store.apiUrl}/${string}/${id}/credits?api_key=${this.store.apiKey}`;
             axios.get(reqCast).then((resp) => {
-                if (resp.data.cast.length > 1) {
+                if (resp.data.cast.length > 0) {
                     for (let i = 0; i < 5; i++)
                         this.store.castList.push(resp.data.cast[i].name);
                 }
