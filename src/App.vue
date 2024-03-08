@@ -58,6 +58,7 @@ export default {
     },
     reset() {
       this.store.stringToSearch = "";
+      this.store.selected = true;
       this.search();
     }
   }
@@ -65,8 +66,10 @@ export default {
 </script>
 
 <template>
-  <AppHeader @search="search" />
-  <AppMain @reset="reset" @search="search" />
+  <div class="container py-3">
+    <AppHeader @search="search" @reset="reset" />
+    <AppMain />
+  </div>
 </template>
 
 <style lang="scss">

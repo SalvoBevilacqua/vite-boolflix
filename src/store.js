@@ -12,4 +12,6 @@ export const store = reactive({
     chosenGenre: "",
     flagLoading: false,
     stringToSearch: '',
+    // con true visualizzo i film, con false visualizzo le serie
+    selected: true,
 })

@@ -44,38 +44,20 @@ export default {
 </script>
 
 <template>
-    <div class="bg-dark px-4 pb-4">
-        <div class="p-4 bg-white rounded-2">
-            <AppLoader v-if="store.flagLoading" />
+    <AppLoader v-if="store.flagLoading" />
 
-            <div v-else>
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <a type="button" id="movie" href="#tv" class="btn btn-outline-dark">Movies</a>
+    <div v-else class="pt-3">
+        <div v-if="store.selected" class="row row-cols-5 row-gap-4">
+            <div class="col" v-for="movie in store.arrayMovie" :key="movie.id">
+                <AppCard :movieObj="movie" @cast="searchCast(movie.id, 'movie')"
+                    @genres="searchGenres(movie.id, movie.genre_ids)" />
+            </div>
+        </div>
 
-                    <div class="d-flex gap-4">
-                        <button @click="$emit('reset')" type="button" class="btn btn-outline-dark">Reset</button>
-                        <select class="form-select" aria-label="archetype" id="select" v-model="store.chosenGenre"
-                            @change="$emit('search')">
-                            <option disabled value="">Choose the Genre</option>
-                            <option v-for="item in store.arrayGenres" :value="item.id">{{ item.name }}</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row row-cols-5 row-gap-4">
-                    <div class="col" v-for="movie in store.arrayMovie" :key="movie.id">
-                        <AppCard :movieObj="movie" @cast="searchCast(movie.id, 'movie')"
-                            @genres="searchGenres(movie.id, movie.genre_ids)" />
-                    </div>
-                </div>
-
-                <a id="tv" href="#movie" type="button" class="btn btn-outline-dark my-4">Series</a>
-                <div class="row row-cols-5 row-gap-4">
-                    <div class="col" v-for="serie in store.arrayTv" :key="serie.id">
-                        <AppCard :movieObj="serie" @cast="searchCast(serie.id, 'tv')"
-                            @genres="searchGenres(serie.id, serie.genre_ids)" />
-                    </div>
-                </div>
+        <div v-else class="row row-cols-5 row-gap-4">
+            <div class="col" v-for="serie in store.arrayTv" :key="serie.id">
+                <AppCard :movieObj="serie" @cast="searchCast(serie.id, 'tv')"
+                    @genres="searchGenres(serie.id, serie.genre_ids)" />
             </div>
         </div>
     </div>
