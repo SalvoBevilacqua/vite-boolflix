@@ -18,7 +18,8 @@ export default {
 
 <template>
     <header class="d-flex my-3 p-3 align-items-center justify-content-between rounded-4 shadow">
-        <h1 class="text-danger">Boolflix</h1>
+        <!-- <h1 class="text-danger">Boolflix</h1> -->
+        <img src="../assets/boolflix-logo.png" alt="logo" class="ms_img">
 
         <div class="d-flex gap-3">
             <div v-if="isActive" class="d-flex gap-3">
@@ -57,5 +58,9 @@ export default {
 
 .active {
     display: none;
+}
+
+.ms_img {
+    width: 10rem;
 }
 </style>
