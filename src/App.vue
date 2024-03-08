@@ -66,7 +66,7 @@ export default {
 </script>
 
 <template>
-  <div class="container py-3">
+  <div class="container pt-3 pb-5">
     <AppHeader @search="search" @reset="reset" />
     <AppMain />
   </div>

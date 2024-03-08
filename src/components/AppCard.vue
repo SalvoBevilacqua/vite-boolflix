@@ -41,7 +41,7 @@ export default {
 </script>
 
 <template>
-    <div class="card text-center h-100 position-relative ms_card shadow-sm border-0 rounded-4" :key="movieObj.id">
+    <div class="card text-center h-100 position-relative border-0 rounded-4 shadow-lg ms_card" :key="movieObj.id">
         <img v-if="movieObj.poster_path" :src="`http://image.tmdb.org/t/p/w342${movieObj.poster_path}`"
             class="ms_img h-100 object-fit-fill border rounded-4" :alt="movieObj.id">
         <p v-else class="d-flex align-items-center justify-content-center h-100">
