@@ -1,7 +1,7 @@
-# Vue 3 + Vite
+**Boolflix**
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+- Boolflix è una vetrina di film e serie tv realizzata durante il corso Boolean in Vue e Vite. Uno dei primi esercizi di chiamata API, in questo caso a themoviedb, che popola la homepage e che uso per la ricerca ed i filtri più avanzati.
 
-## Recommended IDE Setup
+![Immagine repo](https://github.com/SalvoBevilacqua/vite-boolflix/blob/main/boolflix_1.png)
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+![Immagine repo](https://github.com/SalvoBevilacqua/vite-boolflix/blob/main/boolflix_2.png)
